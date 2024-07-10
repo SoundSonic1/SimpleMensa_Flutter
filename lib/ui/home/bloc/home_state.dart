@@ -6,6 +6,8 @@ abstract class HomeState {}
 
 class HomeLoading extends HomeState {}
 
+class HomeError extends HomeState {}
+
 class HomeDataLoaded extends HomeState {
   HomeDataLoaded({required this.canteens});
 

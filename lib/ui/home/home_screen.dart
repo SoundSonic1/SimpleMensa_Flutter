@@ -34,8 +34,14 @@ class HomeScreen extends StatelessWidget {
           return CanteenCard(canteen: canteens[index]);
         },
       );
-    } else {
+    } else if (state is HomeLoading) {
       return Animations.progressIndicator();
+    } else {
+      return const Center(
+          child: Text(
+        'Something went wrong.',
+        style: TextStyle(fontSize: 24),
+      ));
     }
   }
 }

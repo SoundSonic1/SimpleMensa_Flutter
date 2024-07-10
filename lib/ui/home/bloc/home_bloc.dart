@@ -10,7 +10,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeLoadData>((event, emit) async {
       emit(HomeLoading());
       final canteens = await mensaRepository.getCanteens();
-      emit(HomeDataLoaded(canteens: canteens));
+      if (canteens.isNotEmpty) {
+        canteens.sort((a, b) => a.name.compareTo(b.name));
+        emit(HomeDataLoaded(canteens: canteens));
+      } else {
+        emit(HomeError());
+      }
     });
     on<HomeCanteenClicked>((event, emit) {
       // navigate to meals

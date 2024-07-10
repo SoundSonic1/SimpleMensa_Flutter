@@ -8,8 +8,14 @@ class CanteenCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(canteen.name),
+    return Card(
+      child: ListTile(
+        leading: Image.network(
+          canteen.getImageUrl(),
+        ),
+        title: Text(canteen.name),
+        subtitle: Text(canteen.address),
+      ),
     );
   }
 }
