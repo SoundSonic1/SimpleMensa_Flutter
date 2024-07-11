@@ -6,6 +6,7 @@ import 'package:simple_mensa/data/repository/mensa_repository.dart';
 import 'package:simple_mensa/ui/canteen/bloc/canteen_bloc.dart';
 import 'package:simple_mensa/ui/canteen/bloc/canteen_event.dart';
 import 'package:simple_mensa/ui/canteen/bloc/canteen_state.dart';
+import 'package:simple_mensa/ui/canteen/widget/meal_card.dart';
 import 'package:simple_mensa/ui/widget/simple_app_bar.dart';
 import 'package:simple_mensa/ui/widget/simple_error.dart';
 import 'package:simple_mensa/ui/widget/simple_progress_indicator.dart';
@@ -36,7 +37,7 @@ class CanteenScreen extends StatelessWidget {
     } else if (state is CanteenDataLoaded) {
       return _buildMealList(context, state.meals);
     } else {
-      return const SimpleError();
+      return const SimpleError(message: 'No meals today.');
     }
   }
 
@@ -44,8 +45,6 @@ class CanteenScreen extends StatelessWidget {
     return ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
         itemCount: meals.length,
-        itemBuilder: (context, index) => ListTile(
-              title: Text(meals[index].name),
-            ));
+        itemBuilder: (context, index) => MealCard(meal: meals[index]));
   }
 }

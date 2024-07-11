@@ -33,7 +33,9 @@ class HomeScreen extends StatelessWidget {
     } else if (state is HomeLoading) {
       return const SimpleProgressIndicator();
     } else {
-      return const SimpleError();
+      return const SimpleError(
+        message: 'Something went wrong',
+      );
     }
   }
 

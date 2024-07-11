@@ -1,14 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class SimpleError extends StatelessWidget {
-  const SimpleError({super.key});
+  const SimpleError({super.key, required this.message});
+
+  final String message;
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
         child: Text(
-      'Something went wrong.',
-      style: TextStyle(fontSize: 24),
+      message,
+      style: const TextStyle(fontSize: 24),
     ));
   }
 }
