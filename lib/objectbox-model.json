@@ -1,0 +1,52 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:1013436143808751930",
+      "lastPropertyId": "5:9060936973768609386",
+      "name": "Canteen",
+      "properties": [
+        {
+          "id": "1:1423418247291073298",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:6795584806307228333",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "3:5582244622338582510",
+          "name": "coordinates",
+          "type": 29
+        },
+        {
+          "id": "4:6096255231483134991",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:9060936973768609386",
+          "name": "url",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:1013436143808751930",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

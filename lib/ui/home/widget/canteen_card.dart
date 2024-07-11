@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_mensa/data/model/canteen.dart';
 
@@ -8,10 +9,13 @@ class CanteenCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const size = 84.0;
     return Card(
       child: ListTile(
-        leading: Image.network(
-          canteen.getImageUrl(),
+        leading: CachedNetworkImage(
+          imageUrl: canteen.getImageUrl(),
+          width: size,
+          height: size,
         ),
         title: Text(canteen.name),
         subtitle: Text(canteen.address),

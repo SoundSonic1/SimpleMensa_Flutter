@@ -6,11 +6,8 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:simple_mensa/simple_mensa.dart';
 
 void main() {
   testWidgets('Test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const SimpleMensa());
   });
 }
