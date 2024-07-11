@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:simple_mensa/data/model/canteen.dart';
 
 @immutable

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:simple_mensa/data/model/canteen.dart';
+import 'package:simple_mensa/data/model/meal.dart';
 import 'package:simple_mensa/data/service/mensa_client.dart';
 import 'package:simple_mensa/objectbox.g.dart';
 
@@ -18,6 +19,14 @@ class MensaRepository {
     } catch (e) {
       log(e.toString());
       return await canteenBox.getAllAsync();
+    }
+  }
+
+  Future<List<Meal>> getMeals(String id, String date) async {
+    try {
+      return await mensaClient.getMeals(id, date);
+    } catch (e) {
+      return const [];
     }
   }
 }

@@ -17,8 +17,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(HomeError());
       }
     });
-    on<HomeCanteenClicked>((event, emit) {
-      // navigate to meals
-    });
   }
 }
