@@ -11,9 +11,8 @@ class CanteenBloc extends Bloc<CanteenEvent, CanteenState> {
   CanteenBloc({required this.mensaRepository}) : super(CanteenLoading()) {
     on<CanteenLoadData>((event, emit) async {
       emit(CanteenLoading());
-      final dateTimeNow = DateTime.now();
       final meals = await mensaRepository.getMeals(event.canteen.id.toString(),
-          DateFormat(Constants.dateFormat).format(dateTimeNow));
+          DateFormat(Constants.dateFormat).format(event.dateTime));
       if (meals.isNotEmpty) {
         emit(CanteenDataLoaded(meals: meals));
       } else {

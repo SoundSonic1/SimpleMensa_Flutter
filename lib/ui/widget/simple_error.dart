@@ -9,8 +9,8 @@ class SimpleError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Text(
-      message,
-      style: const TextStyle(fontSize: 24),
-    ));
+        message,
+        style: const TextStyle(fontSize: 24),
+      ));
   }
 }

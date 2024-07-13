@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 
 class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const SimpleAppBar({super.key, required this.title});
+  const SimpleAppBar(
+      {super.key, required this.title, this.height, this.bottom});
 
   final String title;
+  final PreferredSizeWidget? bottom;
+  final double? height;
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height ?? kToolbarHeight);
 
   @override
   Widget build(BuildContext context) => AppBar(
         leading: _buildLeadingWidget(context),
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xff3b3b3b),
         titleSpacing: 12.0,
         title: Text(
           title,
           style: const TextStyle(color: Colors.white),
         ),
+        bottom: bottom,
       );
 
   Widget _buildLeadingWidget(BuildContext context) {

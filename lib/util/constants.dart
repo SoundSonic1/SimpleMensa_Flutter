@@ -5,4 +5,5 @@ class Constants {
   static const canteenImageUrl =
       'https://static.studentenwerk-dresden.de/mensen/mensen-cafeterien-aussenansichten/';
   static const dateFormat = 'yyyy-MM-dd';
+  static const germanDateFormat = 'dd.MM.yyyy';
 }
