@@ -12,6 +12,7 @@ import 'package:simple_mensa/ui/canteen/widget/meal_card.dart';
 import 'package:simple_mensa/ui/widget/simple_app_bar.dart';
 import 'package:simple_mensa/ui/widget/simple_error.dart';
 import 'package:simple_mensa/ui/widget/simple_progress_indicator.dart';
+import 'package:simple_mensa/ui/widget/simple_refresh_indicator.dart';
 import 'package:simple_mensa/util/constants.dart';
 import 'package:simple_mensa/util/date_time_util.dart';
 
@@ -60,9 +61,23 @@ class CanteenScreen extends StatelessWidget {
         if (state is CanteenLoading) {
           return const SimpleProgressIndicator();
         } else if (state is CanteenDataLoaded) {
-          return _buildMealList(state.meals);
+          return SimpleRefreshIndicator(
+              onRefresh: () async {
+                _onRefresh(context.read(), dateTime);
+              },
+              child: _buildMealList(state.meals));
         } else {
-          return SimpleError(message: context.loc.no_meals);
+          return SimpleRefreshIndicator(
+              onRefresh: () async {
+                _onRefresh(context.read(), dateTime);
+              },
+              child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                      height: MediaQuery.of(context).size.height -
+                          MediaQuery.of(context).padding.top -
+                          2 * kToolbarHeight,
+                      child: SimpleError(message: context.loc.no_meals))));
         }
       }),
     );
@@ -73,5 +88,9 @@ class CanteenScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
         itemCount: meals.length,
         itemBuilder: (context, index) => MealCard(meal: meals[index]));
+  }
+
+  void _onRefresh(CanteenBloc bloc, DateTime dateTime) {
+    bloc.add(CanteenLoadData(canteen: canteen, dateTime: dateTime));
   }
 }

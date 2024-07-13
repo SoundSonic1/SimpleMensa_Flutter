@@ -13,6 +13,7 @@ import 'package:simple_mensa/ui/home/widget/canteen_card.dart';
 import 'package:simple_mensa/ui/widget/simple_app_bar.dart';
 import 'package:simple_mensa/ui/widget/simple_error.dart';
 import 'package:simple_mensa/ui/widget/simple_progress_indicator.dart';
+import 'package:simple_mensa/ui/widget/simple_refresh_indicator.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,23 +35,46 @@ class HomeScreen extends StatelessWidget {
     } else if (state is HomeLoading) {
       return const SimpleProgressIndicator();
     } else {
-      return SimpleError(
-        message: context.loc.default_error_message,
-      );
+      return _buildErrorMessage(context);
     }
   }
 
   Widget _buildCanteenList(BuildContext context, List<Canteen> canteens) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-      itemCount: canteens.length,
-      itemBuilder: (context, index) => CanteenCard(
-        canteen: canteens[index],
-        onTap: () {
-          Navigator.of(context).push(PageTransition(
-              child: CanteenScreen(canteen: canteens[index]),
-              type: PageTransitionType.fade));
-        },
+    return SimpleRefreshIndicator(
+      onRefresh: () async {
+        context.read<HomeBloc>().add(HomeLoadData());
+      },
+      child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: canteens.length,
+        itemBuilder: (context, index) => CanteenCard(
+          canteen: canteens[index],
+          onTap: () {
+            Navigator.of(context).push(PageTransition(
+                child: CanteenScreen(canteen: canteens[index]),
+                type: PageTransitionType.fade));
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildErrorMessage(BuildContext context) {
+    return SimpleRefreshIndicator(
+      onRefresh: () async {
+        context.read<HomeBloc>().add(HomeLoadData());
+      },
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height -
+              MediaQuery.of(context).padding.top -
+              2 * kToolbarHeight,
+          child: SimpleError(
+            message: context.loc.default_error_message,
+          ),
+        ),
       ),
     );
   }

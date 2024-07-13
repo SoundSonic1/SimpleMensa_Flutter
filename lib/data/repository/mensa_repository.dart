@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:simple_mensa/data/model/canteen.dart';
 import 'package:simple_mensa/data/model/meal.dart';
 import 'package:simple_mensa/data/service/mensa_client.dart';
@@ -17,7 +18,9 @@ class MensaRepository {
       canteenBox.putManyAsync(canteens);
       return canteens;
     } catch (e) {
-      log(e.toString());
+      if (kDebugMode) {
+        log(e.toString());
+      }
       return await canteenBox.getAllAsync();
     }
   }
@@ -26,7 +29,9 @@ class MensaRepository {
     try {
       return await mensaClient.getMeals(id, date);
     } catch (e) {
-      log(e.toString());
+      if (kDebugMode) {
+        log(e.toString());
+      }
       return const [];
     }
   }
