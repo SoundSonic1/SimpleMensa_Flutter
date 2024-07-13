@@ -26,6 +26,7 @@ class MensaRepository {
     try {
       return await mensaClient.getMeals(id, date);
     } catch (e) {
+      log(e.toString());
       return const [];
     }
   }

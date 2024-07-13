@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simple_mensa/data/model/canteen.dart';
 import 'package:simple_mensa/data/repository/mensa_repository.dart';
+import 'package:simple_mensa/extension/build_context_extension.dart';
 import 'package:simple_mensa/simple_mensa.dart';
 import 'package:simple_mensa/ui/canteen/canteen_screen.dart';
 import 'package:simple_mensa/ui/home/bloc/home_bloc.dart';
@@ -33,8 +34,8 @@ class HomeScreen extends StatelessWidget {
     } else if (state is HomeLoading) {
       return const SimpleProgressIndicator();
     } else {
-      return const SimpleError(
-        message: 'Something went wrong',
+      return SimpleError(
+        message: context.loc.default_error_message,
       );
     }
   }

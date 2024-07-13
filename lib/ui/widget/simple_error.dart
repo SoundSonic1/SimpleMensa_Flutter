@@ -7,10 +7,13 @@ class SimpleError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Text(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+          child: Text(
         message,
         style: const TextStyle(fontSize: 24),
-      ));
+      )),
+    );
   }
 }
