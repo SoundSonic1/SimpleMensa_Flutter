@@ -41,6 +41,10 @@ class MealCard extends StatelessWidget {
                       SvgPicture.asset(
                         'assets/carrot_icon.svg',
                         width: 20.0,
+                        colorFilter: userSettings.useDarkTheme
+                            ? const ColorFilter.mode(
+                                Colors.white, BlendMode.srcIn)
+                            : null,
                       ),
                       const SizedBox(
                         width: 8.0,

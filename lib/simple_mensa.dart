@@ -9,12 +9,16 @@ import 'package:simple_mensa/data/repository/user_repository.dart';
 import 'package:simple_mensa/data/service/mensa_client.dart';
 import 'package:simple_mensa/objectbox.g.dart';
 import 'package:simple_mensa/ui/home/home_screen.dart';
+import 'package:simple_mensa/ui/theme/theme_bloc.dart';
+import 'package:simple_mensa/ui/theme/theme_state.dart';
 
 class SimpleMensa extends StatelessWidget {
-  const SimpleMensa({super.key, required this.store});
+  const SimpleMensa(
+      {super.key, required this.store, required this.useDarkTheme});
 
   static const title = 'SimpleMensa';
   final Store store;
+  final bool useDarkTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +37,25 @@ class SimpleMensa extends StatelessWidget {
             create: (_) =>
                 UserRepository(settingsBox: store.box<UserSettings>())),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: title,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: const HomeScreen(),
+      child: BlocProvider<ThemeBloc>(
+        create: (context) => ThemeBloc(
+            userRepository: context.read(), useDarkTheme: useDarkTheme),
+        child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+          final bool useDarkTheme = (state as ThemeLoaded).useDarkTheme;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: title,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            darkTheme: ThemeData.dark(useMaterial3: true),
+            themeMode: useDarkTheme ? ThemeMode.dark : ThemeMode.light,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: const HomeScreen(),
+          );
+        }),
       ),
     );
   }

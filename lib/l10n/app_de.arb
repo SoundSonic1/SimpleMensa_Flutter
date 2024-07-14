@@ -3,7 +3,7 @@
   "no_meals": "Heute gibt es keine Gerichte.",
   "canteens": "Mensen",
   "about": "Über",
-  "about_content": "Die App ist mit Flutter ❤\uFE0F gebaut. Sie nutzt die Mensa API des Studentenwerks Dresden. ",
+  "about_content": "Die App ist mit Flutter ❤\uFE0F gebaut. Sie nutzt die Mensa API des Studentenwerks Dresden. Das Projekt findest du ",
   "about_link": "hier",
   "settings": "Einstellungen",
   "settings_highlight_vegan": "Hebe vegane Gerichte hervor",

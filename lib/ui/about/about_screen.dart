@@ -22,7 +22,10 @@ class AboutScreen extends StatelessWidget {
             text: TextSpan(children: [
               TextSpan(
                   text: context.loc.about_content,
-                  style: const TextStyle(fontSize: 20.0, color: Colors.black)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(fontSize: 20)),
               TextSpan(
                 text: context.loc.about_link,
                 style:

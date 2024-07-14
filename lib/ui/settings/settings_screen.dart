@@ -4,6 +4,8 @@ import 'package:simple_mensa/extension/build_context_extension.dart';
 import 'package:simple_mensa/ui/settings/bloc/settings_bloc.dart';
 import 'package:simple_mensa/ui/settings/bloc/settings_event.dart';
 import 'package:simple_mensa/ui/settings/bloc/settings_state.dart';
+import 'package:simple_mensa/ui/theme/theme_bloc.dart';
+import 'package:simple_mensa/ui/theme/theme_event.dart';
 import 'package:simple_mensa/ui/widget/simple_app_bar.dart';
 import 'package:simple_mensa/ui/widget/simple_drawer.dart';
 import 'package:simple_mensa/ui/widget/simple_progress_indicator.dart';
@@ -43,7 +45,14 @@ class SettingsScreen extends StatelessWidget {
           title: Text(context.loc.settings_change_theme),
           trailing: Switch(
             value: settings.userSettings.useDarkTheme,
-            onChanged: (value) {},
+            onChanged: (value) {
+              final userSettings =
+                  settings.userSettings.copyWith(useDarkTheme: value);
+              context
+                  .read<SettingsBloc>()
+                  .add(SettingsSetInput(userSettings: userSettings));
+              context.read<ThemeBloc>().add(ThemeSet(useDarkTheme: value));
+            },
           ),
         ),
         const Divider(),

@@ -12,6 +12,6 @@ class UserRepository {
   }
 
   Future<void> saveUserSettings(UserSettings settings) async {
-    settingsBox.putAsync(settings);
+    await settingsBox.putAsync(settings);
   }
 }
