@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_mensa/extension/build_context_extension.dart';
+import 'package:simple_mensa/ui/home/home_screen.dart';
 import 'package:simple_mensa/ui/widget/simple_app_bar.dart';
 import 'package:simple_mensa/ui/widget/simple_drawer.dart';
 import 'package:simple_mensa/util/constants.dart';
@@ -11,32 +12,45 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: SimpleAppBar(title: context.loc.about),
-        drawer: const SimpleDrawer(
-          selectedIndex: 2,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: RichText(
-            text: TextSpan(children: [
-              TextSpan(
-                  text: context.loc.about_content,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(fontSize: 20)),
-              TextSpan(
-                text: context.loc.about_link,
-                style:
-                    const TextStyle(fontSize: 20.0, color: Colors.deepPurple),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () async {
-                    launchUrl(Uri.parse(Constants.projectUrl));
-                  },
-              )
-            ]),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
+        ;
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => const HomeScreen()),
+            (route) => false);
+      },
+      child: Scaffold(
+          appBar: SimpleAppBar(title: context.loc.about),
+          drawer: const SimpleDrawer(
+            selectedIndex: 2,
           ),
-        ));
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RichText(
+              text: TextSpan(children: [
+                TextSpan(
+                    text: context.loc.about_content,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontSize: 20)),
+                TextSpan(
+                  text: context.loc.about_link,
+                  style:
+                      const TextStyle(fontSize: 20.0, color: Colors.deepPurple),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async {
+                      launchUrl(Uri.parse(Constants.projectUrl));
+                    },
+                )
+              ]),
+            ),
+          )),
+    );
   }
 }

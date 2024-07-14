@@ -71,8 +71,7 @@ class SimpleDrawer extends StatelessWidget {
   }
 
   void _navigateTo(BuildContext context, Widget screen) {
-    Navigator.pop(context);
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (_) => screen));
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => screen), (route) => false);
   }
 }

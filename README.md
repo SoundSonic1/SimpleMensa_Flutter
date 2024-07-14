@@ -1,4 +1,4 @@
-# simple_mensa
+# SimpleMensa
 
 A new Flutter project.
 

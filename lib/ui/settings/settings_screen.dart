@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_mensa/extension/build_context_extension.dart';
+import 'package:simple_mensa/ui/home/home_screen.dart';
 import 'package:simple_mensa/ui/settings/bloc/settings_bloc.dart';
 import 'package:simple_mensa/ui/settings/bloc/settings_event.dart';
 import 'package:simple_mensa/ui/settings/bloc/settings_state.dart';
@@ -18,21 +19,34 @@ class SettingsScreen extends StatelessWidget {
     return BlocProvider<SettingsBloc>(
       create: (context) =>
           SettingsBloc(userRepository: context.read())..add(SettingsLoadData()),
-      child: Scaffold(
-        appBar: SimpleAppBar(
-          title: context.loc.settings,
-        ),
-        drawer: const SimpleDrawer(
-          selectedIndex: 1,
-        ),
-        body:
-            BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
-          if (state is SettingsDataLoaded) {
-            return _buildSettingsList(context, state);
-          } else {
-            return const SimpleProgressIndicator();
+      child: PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) {
+          if (didPop) {
+            return;
           }
-        }),
+          ;
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => const HomeScreen()),
+              (route) => false);
+        },
+        child: Scaffold(
+          appBar: SimpleAppBar(
+            title: context.loc.settings,
+          ),
+          drawer: const SimpleDrawer(
+            selectedIndex: 1,
+          ),
+          body: BlocBuilder<SettingsBloc, SettingsState>(
+              builder: (context, state) {
+            if (state is SettingsDataLoaded) {
+              return _buildSettingsList(context, state);
+            } else {
+              return const SimpleProgressIndicator();
+            }
+          }),
+        ),
       ),
     );
   }
