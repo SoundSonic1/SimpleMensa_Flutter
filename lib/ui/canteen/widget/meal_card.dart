@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:simple_mensa/data/model/meal.dart';
 
 class MealCard extends StatelessWidget {
@@ -11,7 +12,22 @@ class MealCard extends StatelessWidget {
   Widget build(BuildContext context) => Card(
         child: ExpansionTile(
           title: Text(meal.name),
-          subtitle: Text(meal.formattedPrices()),
+          subtitle: Row(
+            children: [
+              if (meal.category != null) Text(meal.category!),
+              const Spacer(),
+              if (meal.isVeggie) ...[
+                SvgPicture.asset(
+                  'assets/carrot_icon.svg',
+                  width: 20.0,
+                ),
+                const SizedBox(
+                  width: 8.0,
+                )
+              ],
+              Text(meal.formattedPrices()),
+            ],
+          ),
           shape: const Border(),
           children: <Widget>[
             if (meal.image != null)
