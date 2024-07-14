@@ -11,6 +11,7 @@ import 'package:simple_mensa/ui/home/bloc/home_event.dart';
 import 'package:simple_mensa/ui/home/bloc/home_state.dart';
 import 'package:simple_mensa/ui/home/widget/canteen_card.dart';
 import 'package:simple_mensa/ui/widget/simple_app_bar.dart';
+import 'package:simple_mensa/ui/widget/simple_drawer.dart';
 import 'package:simple_mensa/ui/widget/simple_error.dart';
 import 'package:simple_mensa/ui/widget/simple_progress_indicator.dart';
 import 'package:simple_mensa/ui/widget/simple_refresh_indicator.dart';
@@ -26,6 +27,9 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
           appBar: const SimpleAppBar(
             title: SimpleMensa.title,
+          ),
+          drawer: const SimpleDrawer(
+            selectedIndex: 0,
           ),
           body: BlocBuilder<HomeBloc, HomeState>(builder: _buildBody)));
 
@@ -44,11 +48,12 @@ class HomeScreen extends StatelessWidget {
       onRefresh: () async {
         context.read<HomeBloc>().add(HomeLoadData());
       },
-      child: ListView.builder(
+      child: ReorderableListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
         physics: const AlwaysScrollableScrollPhysics(),
         itemCount: canteens.length,
         itemBuilder: (context, index) => CanteenCard(
+          key: ValueKey(canteens[index].id),
           canteen: canteens[index],
           onTap: () {
             Navigator.of(context).push(PageTransition(
@@ -56,6 +61,10 @@ class HomeScreen extends StatelessWidget {
                 type: PageTransitionType.fade));
           },
         ),
+        onReorder: (int oldIndex, int newIndex) {
+          context.read<HomeBloc>().add(HomeOnReorder(
+              oldIndex: oldIndex, newIndex: newIndex, canteens: canteens));
+        },
       ),
     );
   }

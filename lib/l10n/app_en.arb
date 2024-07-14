@@ -1,4 +1,8 @@
 {
   "default_error_message": "Something went wrong.",
-  "no_meals": "There are no meals today."
+  "no_meals": "There are no meals today.",
+  "canteens": "Canteens",
+  "about": "About",
+  "about_content": "The app is built with Flutter ❤\uFE0F. It uses the API from the Studentenwerk Dresden. You can find the source code ",
+  "about_link": "here"
 }

@@ -35,7 +35,7 @@ class CanteenScreen extends StatelessWidget {
             labelStyle: const TextStyle(fontSize: 16),
             labelColor: Colors.white,
             indicatorColor: Colors.purpleAccent,
-            unselectedLabelColor: Colors.grey,
+            unselectedLabelColor: Colors.white70,
             tabs: dateTimeList
                 .map((dateTime) => Tab(
                       child: Text(DateFormat(Constants.germanDateFormat)

@@ -15,40 +15,60 @@ import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'data/model/canteen.dart';
+import 'data/model/user_settings.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(1, 1013436143808751930),
+      id: const obx_int.IdUid(1, 641034140642465628),
       name: 'Canteen',
-      lastPropertyId: const obx_int.IdUid(5, 9060936973768609386),
+      lastPropertyId: const obx_int.IdUid(5, 3721525682194667138),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 1423418247291073298),
+            id: const obx_int.IdUid(1, 3289643459247404795),
             name: 'id',
             type: 6,
             flags: 129),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 6795584806307228333),
+            id: const obx_int.IdUid(2, 3779295450825257040),
             name: 'address',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 5582244622338582510),
+            id: const obx_int.IdUid(3, 1756484174338838246),
             name: 'coordinates',
             type: 29,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 6096255231483134991),
+            id: const obx_int.IdUid(4, 5773814608188441264),
             name: 'name',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 9060936973768609386),
+            id: const obx_int.IdUid(5, 3721525682194667138),
             name: 'url',
             type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(2, 7093431762795321741),
+      name: 'UserSettings',
+      lastPropertyId: const obx_int.IdUid(2, 6639222413906801611),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 3616818448292905376),
+            name: 'id',
+            type: 6,
+            flags: 129),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 6639222413906801611),
+            name: 'canteenOrder',
+            type: 27,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -90,7 +110,7 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(1, 1013436143808751930),
+      lastEntityId: const obx_int.IdUid(2, 7093431762795321741),
       lastIndexId: const obx_int.IdUid(0, 0),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
@@ -153,6 +173,41 @@ obx_int.ModelDefinition getObjectBoxModel() {
               url: urlParam);
 
           return object;
+        }),
+    UserSettings: obx_int.EntityDefinition<UserSettings>(
+        model: _entities[1],
+        toOneRelations: (UserSettings object) => [],
+        toManyRelations: (UserSettings object) => {},
+        getId: (UserSettings object) => object.id,
+        setId: (UserSettings object, int id) {
+          if (object.id != id) {
+            throw ArgumentError('Field UserSettings.id is read-only '
+                '(final or getter-only) and it was declared to be self-assigned. '
+                'However, the currently inserted object (.id=${object.id}) '
+                "doesn't match the inserted ID (ID $id). "
+                'You must assign an ID before calling [box.put()].');
+          }
+        },
+        objectToFB: (UserSettings object, fb.Builder fbb) {
+          final canteenOrderOffset = fbb.writeListInt64(object.canteenOrder);
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, canteenOrderOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final canteenOrderParam =
+              const fb.ListReader<int>(fb.Int64Reader(), lazy: false)
+                  .vTableGet(buffer, rootOffset, 6, []);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final object =
+              UserSettings(canteenOrder: canteenOrderParam, id: idParam);
+
+          return object;
         })
   };
 
@@ -180,4 +235,15 @@ class Canteen_ {
   /// See [Canteen.url].
   static final url =
       obx.QueryStringProperty<Canteen>(_entities[0].properties[4]);
+}
+
+/// [UserSettings] entity fields to define ObjectBox queries.
+class UserSettings_ {
+  /// See [UserSettings.id].
+  static final id =
+      obx.QueryIntegerProperty<UserSettings>(_entities[1].properties[0]);
+
+  /// See [UserSettings.canteenOrder].
+  static final canteenOrder =
+      obx.QueryIntegerVectorProperty<UserSettings>(_entities[1].properties[1]);
 }

@@ -1,4 +1,8 @@
 {
   "default_error_message": "Etwas ist schief gelaufen.",
-  "no_meals": "Heute gibt es keine Gerichte."
+  "no_meals": "Heute gibt es keine Gerichte.",
+  "canteens": "Mensen",
+  "about": "Über",
+  "about_content": "Die App ist mit Flutter ❤\uFE0F gebaut. Sie nutzt die Mensa API des Studentenwerks Dresden. ",
+  "about_link": "hier"
 }

@@ -4,41 +4,60 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:1013436143808751930",
-      "lastPropertyId": "5:9060936973768609386",
+      "id": "1:641034140642465628",
+      "lastPropertyId": "5:3721525682194667138",
       "name": "Canteen",
       "properties": [
         {
-          "id": "1:1423418247291073298",
+          "id": "1:3289643459247404795",
           "name": "id",
           "type": 6,
           "flags": 129
         },
         {
-          "id": "2:6795584806307228333",
+          "id": "2:3779295450825257040",
           "name": "address",
           "type": 9
         },
         {
-          "id": "3:5582244622338582510",
+          "id": "3:1756484174338838246",
           "name": "coordinates",
           "type": 29
         },
         {
-          "id": "4:6096255231483134991",
+          "id": "4:5773814608188441264",
           "name": "name",
           "type": 9
         },
         {
-          "id": "5:9060936973768609386",
+          "id": "5:3721525682194667138",
           "name": "url",
           "type": 9
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:7093431762795321741",
+      "lastPropertyId": "2:6639222413906801611",
+      "name": "UserSettings",
+      "properties": [
+        {
+          "id": "1:3616818448292905376",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:6639222413906801611",
+          "name": "canteenOrder",
+          "type": 27
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:1013436143808751930",
+  "lastEntityId": "2:7093431762795321741",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

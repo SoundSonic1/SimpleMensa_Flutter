@@ -22,6 +22,7 @@ class CanteenCard extends StatelessWidget {
           ),
           title: Text(canteen.name),
           subtitle: Text(canteen.address),
+          trailing: const Icon(Icons.drag_handle),
         ),
       ),
     );

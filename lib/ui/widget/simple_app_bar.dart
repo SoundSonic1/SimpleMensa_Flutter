@@ -14,7 +14,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) => AppBar(
         leading: _buildLeadingWidget(context),
-        backgroundColor: const Color(0xff3b3b3b),
+        backgroundColor: Colors.deepPurple,
         titleSpacing: 12.0,
         title: Text(
           title,
@@ -25,12 +25,12 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget _buildLeadingWidget(BuildContext context) {
     if (ModalRoute.of(context)?.isFirst == true) {
-      return const IconButton(
-        icon: Icon(
+      return IconButton(
+        icon: const Icon(
           Icons.menu,
           color: Colors.white,
         ),
-        onPressed: null,
+        onPressed: () => Scaffold.of(context).openDrawer(),
       );
     }
 

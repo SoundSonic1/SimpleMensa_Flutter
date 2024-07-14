@@ -11,11 +11,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(HomeLoading());
       final canteens = await mensaRepository.getCanteens();
       if (canteens.isNotEmpty) {
-        canteens.sort((a, b) => a.name.compareTo(b.name));
         emit(HomeDataLoaded(canteens: canteens));
       } else {
         emit(HomeError());
       }
+    });
+
+    on<HomeOnReorder>((event, emit) {
+      final canteens = event.canteens;
+      final canteen = canteens.removeAt(event.oldIndex);
+
+      if (event.oldIndex < event.newIndex) {
+        canteens.insert(event.newIndex - 1, canteen);
+      } else {
+        canteens.insert(event.newIndex, canteen);
+      }
+      mensaRepository.saveCanteenOrder(canteens);
+      emit(HomeDataLoaded(canteens: canteens));
     });
   }
 }

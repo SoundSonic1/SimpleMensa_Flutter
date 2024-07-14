@@ -6,4 +6,7 @@ class Constants {
       'https://static.studentenwerk-dresden.de/mensen/mensen-cafeterien-aussenansichten/';
   static const dateFormat = 'yyyy-MM-dd';
   static const germanDateFormat = 'dd.MM.yyyy';
+  static const projectUrl =
+      'https://github.com/SoundSonic1/SimpleMensa_Flutter';
+  static const userId = 1;
 }
