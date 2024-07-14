@@ -20,7 +20,10 @@ class CanteenCard extends StatelessWidget {
             width: size,
             height: size,
           ),
-          title: Text(canteen.name),
+          title: Text(
+            canteen.name,
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
           subtitle: Text(canteen.address),
           trailing: const Icon(Icons.drag_handle),
         ),

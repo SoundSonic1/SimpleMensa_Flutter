@@ -27,17 +27,10 @@ class MensaRepository {
       await canteenBox.removeAllAsync();
       canteenBox.putManyAsync(canteens);
 
-      if (canteenOrderList.isNotEmpty &&
-          canteenOrderList.length == canteens.length) {
-        try {
-          final sortedCanteens = canteenOrderList
-              .map((id) => canteens.firstWhere((e) => id == e.id))
-              .toList();
+      if (canteenOrderList.length == canteens.length) {
+        final sortedCanteens = _sortCanteensById(canteenOrderList, canteens);
+        if (sortedCanteens.isNotEmpty) {
           return sortedCanteens;
-        } catch (e) {
-          if (kDebugMode) {
-            log(e.toString());
-          }
         }
       }
 
@@ -65,5 +58,18 @@ class MensaRepository {
     final userSettings =
         UserSettings(canteenOrder: canteens.map((e) => e.id).toList());
     await settingsBox.putAsync(userSettings);
+  }
+
+  List<Canteen> _sortCanteensById(List<int> ids, List<Canteen> canteens) {
+    try {
+      final sortedCanteens =
+          ids.map((id) => canteens.firstWhere((e) => id == e.id)).toList();
+      return sortedCanteens;
+    } catch (e) {
+      if (kDebugMode) {
+        log(e.toString());
+      }
+    }
+    return const [];
   }
 }
