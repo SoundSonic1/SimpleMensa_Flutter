@@ -32,6 +32,11 @@ class Meal {
     return note != null;
   }
 
+  bool get isVegan {
+    final note = notes?.firstWhereOrNull((note) => note.contains('vegan'));
+    return note != null;
+  }
+
   String formattedPrices() {
     final numberFormat = NumberFormat.currency(locale: 'de_De', symbol: '€');
     return prices.values.map((e) => numberFormat.format(e)).join('/');

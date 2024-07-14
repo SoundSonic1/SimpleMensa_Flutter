@@ -21,33 +21,33 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(1, 641034140642465628),
+      id: const obx_int.IdUid(1, 901104775374138342),
       name: 'Canteen',
-      lastPropertyId: const obx_int.IdUid(5, 3721525682194667138),
+      lastPropertyId: const obx_int.IdUid(5, 5715558816695409887),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 3289643459247404795),
+            id: const obx_int.IdUid(1, 4039942095220688568),
             name: 'id',
             type: 6,
             flags: 129),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 3779295450825257040),
+            id: const obx_int.IdUid(2, 3061508305517873887),
             name: 'address',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 1756484174338838246),
+            id: const obx_int.IdUid(3, 4651748061628842574),
             name: 'coordinates',
             type: 29,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 5773814608188441264),
+            id: const obx_int.IdUid(4, 5010828180251857654),
             name: 'name',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 3721525682194667138),
+            id: const obx_int.IdUid(5, 5715558816695409887),
             name: 'url',
             type: 9,
             flags: 0)
@@ -55,20 +55,30 @@ final _entities = <obx_int.ModelEntity>[
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(2, 7093431762795321741),
+      id: const obx_int.IdUid(2, 4487385513029925697),
       name: 'UserSettings',
-      lastPropertyId: const obx_int.IdUid(2, 6639222413906801611),
+      lastPropertyId: const obx_int.IdUid(4, 1936853899514021191),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 3616818448292905376),
+            id: const obx_int.IdUid(1, 2832552634909393515),
             name: 'id',
             type: 6,
             flags: 129),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 6639222413906801611),
+            id: const obx_int.IdUid(2, 5601032840536963689),
             name: 'canteenOrder',
             type: 27,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 6889811556800604844),
+            name: 'useDarkTheme',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 1936853899514021191),
+            name: 'highlightVegan',
+            type: 1,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -110,7 +120,7 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(2, 7093431762795321741),
+      lastEntityId: const obx_int.IdUid(2, 4487385513029925697),
       lastIndexId: const obx_int.IdUid(0, 0),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
@@ -190,22 +200,31 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (UserSettings object, fb.Builder fbb) {
           final canteenOrderOffset = fbb.writeListInt64(object.canteenOrder);
-          fbb.startTable(3);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, canteenOrderOffset);
+          fbb.addBool(2, object.useDarkTheme);
+          fbb.addBool(3, object.highlightVegan);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final canteenOrderParam =
               const fb.ListReader<int>(fb.Int64Reader(), lazy: false)
                   .vTableGet(buffer, rootOffset, 6, []);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final object =
-              UserSettings(canteenOrder: canteenOrderParam, id: idParam);
+          final useDarkThemeParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 8, false);
+          final highlightVeganParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final object = UserSettings(
+              id: idParam,
+              canteenOrder: canteenOrderParam,
+              useDarkTheme: useDarkThemeParam,
+              highlightVegan: highlightVeganParam);
 
           return object;
         })
@@ -246,4 +265,12 @@ class UserSettings_ {
   /// See [UserSettings.canteenOrder].
   static final canteenOrder =
       obx.QueryIntegerVectorProperty<UserSettings>(_entities[1].properties[1]);
+
+  /// See [UserSettings.useDarkTheme].
+  static final useDarkTheme =
+      obx.QueryBooleanProperty<UserSettings>(_entities[1].properties[2]);
+
+  /// See [UserSettings.highlightVegan].
+  static final highlightVegan =
+      obx.QueryBooleanProperty<UserSettings>(_entities[1].properties[3]);
 }

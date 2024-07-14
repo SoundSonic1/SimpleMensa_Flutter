@@ -14,7 +14,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
         appBar: SimpleAppBar(title: context.loc.about),
         drawer: const SimpleDrawer(
-          selectedIndex: 1,
+          selectedIndex: 2,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

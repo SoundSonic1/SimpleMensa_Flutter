@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_mensa/data/model/canteen.dart';
 import 'package:simple_mensa/data/model/meal.dart';
+import 'package:simple_mensa/data/model/user_settings.dart';
 import 'package:simple_mensa/data/repository/mensa_repository.dart';
+import 'package:simple_mensa/data/repository/user_repository.dart';
 import 'package:simple_mensa/extension/build_context_extension.dart';
 import 'package:simple_mensa/ui/canteen/bloc/canteen_bloc.dart';
 import 'package:simple_mensa/ui/canteen/bloc/canteen_event.dart';
@@ -53,9 +55,10 @@ class CanteenScreen extends StatelessWidget {
 
   Widget _buildBody(DateTime dateTime) {
     return BlocProvider(
-      create: (context) =>
-          CanteenBloc(mensaRepository: context.read<MensaRepository>())
-            ..add(CanteenLoadData(canteen: canteen, dateTime: dateTime)),
+      create: (context) => CanteenBloc(
+          mensaRepository: context.read<MensaRepository>(),
+          userRepository: context.read<UserRepository>())
+        ..add(CanteenLoadData(canteen: canteen, dateTime: dateTime)),
       child: BlocBuilder<CanteenBloc, CanteenState>(
           builder: (BuildContext context, CanteenState state) {
         if (state is CanteenLoading) {
@@ -65,7 +68,7 @@ class CanteenScreen extends StatelessWidget {
               onRefresh: () async {
                 _onRefresh(context.read(), dateTime);
               },
-              child: _buildMealList(state.meals));
+              child: _buildMealList(state.meals, state.userSettings));
         } else {
           return SimpleRefreshIndicator(
               onRefresh: () async {
@@ -83,11 +86,14 @@ class CanteenScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMealList(List<Meal> meals) {
+  Widget _buildMealList(List<Meal> meals, UserSettings userSettings) {
     return ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
         itemCount: meals.length,
-        itemBuilder: (context, index) => MealCard(meal: meals[index]));
+        itemBuilder: (context, index) => MealCard(
+              meal: meals[index],
+              userSettings: userSettings,
+            ));
   }
 
   void _onRefresh(CanteenBloc bloc, DateTime dateTime) {

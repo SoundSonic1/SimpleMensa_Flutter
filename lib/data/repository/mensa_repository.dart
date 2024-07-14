@@ -56,8 +56,10 @@ class MensaRepository {
 
   Future<void> saveCanteenOrder(List<Canteen> canteens) async {
     final userSettings =
-        UserSettings(canteenOrder: canteens.map((e) => e.id).toList());
-    await settingsBox.putAsync(userSettings);
+        await settingsBox.getAsync(Constants.userId) ?? UserSettings();
+
+    await settingsBox.putAsync(userSettings.copyWith(
+        canteenOrder: canteens.map((e) => e.id).toList()));
   }
 
   List<Canteen> _sortCanteensById(List<int> ids, List<Canteen> canteens) {

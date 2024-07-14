@@ -4,5 +4,8 @@
   "canteens": "Mensen",
   "about": "Über",
   "about_content": "Die App ist mit Flutter ❤\uFE0F gebaut. Sie nutzt die Mensa API des Studentenwerks Dresden. ",
-  "about_link": "hier"
+  "about_link": "hier",
+  "settings": "Einstellungen",
+  "settings_highlight_vegan": "Hebe vegane Gerichte hervor",
+  "settings_change_theme": "Ändere das Design in dunkel"
 }

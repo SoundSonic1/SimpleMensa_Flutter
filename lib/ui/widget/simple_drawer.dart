@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_mensa/extension/build_context_extension.dart';
 import 'package:simple_mensa/ui/about/about_screen.dart';
 import 'package:simple_mensa/ui/home/home_screen.dart';
+import 'package:simple_mensa/ui/settings/settings_screen.dart';
 
 class SimpleDrawer extends StatelessWidget {
   const SimpleDrawer({super.key, required this.selectedIndex});
@@ -42,6 +43,18 @@ class SimpleDrawer extends StatelessWidget {
           ),
           ListTile(
             selected: selectedIndex == 1,
+            selectedColor: selectedColor,
+            leading: const Icon(Icons.settings),
+            title: Text(
+              context.loc.settings,
+              style: const TextStyle(fontSize: 20.0),
+            ),
+            onTap: () {
+              _navigateTo(context, const SettingsScreen());
+            },
+          ),
+          ListTile(
+            selected: selectedIndex == 2,
             selectedColor: selectedColor,
             leading: const Icon(Icons.info_outline),
             title: Text(

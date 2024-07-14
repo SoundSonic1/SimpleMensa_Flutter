@@ -4,33 +4,33 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:641034140642465628",
-      "lastPropertyId": "5:3721525682194667138",
+      "id": "1:901104775374138342",
+      "lastPropertyId": "5:5715558816695409887",
       "name": "Canteen",
       "properties": [
         {
-          "id": "1:3289643459247404795",
+          "id": "1:4039942095220688568",
           "name": "id",
           "type": 6,
           "flags": 129
         },
         {
-          "id": "2:3779295450825257040",
+          "id": "2:3061508305517873887",
           "name": "address",
           "type": 9
         },
         {
-          "id": "3:1756484174338838246",
+          "id": "3:4651748061628842574",
           "name": "coordinates",
           "type": 29
         },
         {
-          "id": "4:5773814608188441264",
+          "id": "4:5010828180251857654",
           "name": "name",
           "type": 9
         },
         {
-          "id": "5:3721525682194667138",
+          "id": "5:5715558816695409887",
           "name": "url",
           "type": 9
         }
@@ -38,26 +38,36 @@
       "relations": []
     },
     {
-      "id": "2:7093431762795321741",
-      "lastPropertyId": "2:6639222413906801611",
+      "id": "2:4487385513029925697",
+      "lastPropertyId": "4:1936853899514021191",
       "name": "UserSettings",
       "properties": [
         {
-          "id": "1:3616818448292905376",
+          "id": "1:2832552634909393515",
           "name": "id",
           "type": 6,
           "flags": 129
         },
         {
-          "id": "2:6639222413906801611",
+          "id": "2:5601032840536963689",
           "name": "canteenOrder",
           "type": 27
+        },
+        {
+          "id": "3:6889811556800604844",
+          "name": "useDarkTheme",
+          "type": 1
+        },
+        {
+          "id": "4:1936853899514021191",
+          "name": "highlightVegan",
+          "type": 1
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:7093431762795321741",
+  "lastEntityId": "2:4487385513029925697",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
