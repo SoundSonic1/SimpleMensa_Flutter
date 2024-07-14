@@ -39,6 +39,16 @@ class Meal {
 
   String formattedPrices() {
     final numberFormat = NumberFormat.currency(locale: 'de_De', symbol: '€');
-    return prices.values.map((e) => numberFormat.format(e)).join('/');
+
+    if (prices.values.every((e) => e == null)) {
+      return '';
+    }
+
+    return prices.values.map((e) {
+      if (e == null) {
+        return '';
+      }
+      return numberFormat.format(e);
+    }).join('/');
   }
 }
