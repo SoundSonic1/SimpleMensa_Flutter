@@ -39,7 +39,7 @@
     },
     {
       "id": "2:4487385513029925697",
-      "lastPropertyId": "4:1936853899514021191",
+      "lastPropertyId": "5:6125088489955694154",
       "name": "UserSettings",
       "properties": [
         {
@@ -62,6 +62,11 @@
           "id": "4:1936853899514021191",
           "name": "highlightVegan",
           "type": 1
+        },
+        {
+          "id": "5:6125088489955694154",
+          "name": "version",
+          "type": 9
         }
       ],
       "relations": []

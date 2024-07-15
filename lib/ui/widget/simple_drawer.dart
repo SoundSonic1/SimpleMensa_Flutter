@@ -32,14 +32,12 @@ class SimpleDrawer extends StatelessWidget {
           ListTile(
             selected: selectedIndex == 0,
             selectedColor: selectedColor,
-            leading: const Icon(Icons.no_food_rounded),
+            leading: const Icon(Icons.fastfood),
             title: Text(
               context.loc.canteens,
               style: const TextStyle(fontSize: 20.0),
             ),
-            onTap: () {
-              _navigateTo(context, const HomeScreen());
-            },
+            onTap: () => _navigateTo(context, const HomeScreen()),
           ),
           ListTile(
             selected: selectedIndex == 1,
@@ -49,9 +47,7 @@ class SimpleDrawer extends StatelessWidget {
               context.loc.settings,
               style: const TextStyle(fontSize: 20.0),
             ),
-            onTap: () {
-              _navigateTo(context, const SettingsScreen());
-            },
+            onTap: () => _navigateTo(context, const SettingsScreen()),
           ),
           ListTile(
             selected: selectedIndex == 2,
@@ -61,9 +57,7 @@ class SimpleDrawer extends StatelessWidget {
               context.loc.about,
               style: const TextStyle(fontSize: 20.0),
             ),
-            onTap: () {
-              _navigateTo(context, const AboutScreen());
-            },
+            onTap: () => _navigateTo(context, const AboutScreen()),
           ),
         ],
       ),

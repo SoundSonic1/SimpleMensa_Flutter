@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simple_mensa/data/model/canteen.dart';
+import 'package:simple_mensa/data/model/version_info.dart';
 import 'package:simple_mensa/data/repository/mensa_repository.dart';
 import 'package:simple_mensa/data/repository/user_repository.dart';
 import 'package:simple_mensa/extension/build_context_extension.dart';
@@ -103,7 +104,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context) {
           return AlertDialog(
             title: Text(
-              context.loc.init_dialog_title,
+              'SimpleMensa v${VersionInfo.packageInfo.version}',
               style: const TextStyle(fontWeight: FontWeight.w500),
             ),
             content: Text(
@@ -122,7 +123,9 @@ class HomeScreen extends StatelessWidget {
           );
         });
     if (context.mounted) {
-      context.read<HomeBloc>().add(const HomeDismissedDialog());
+      context
+          .read<HomeBloc>()
+          .add(HomeDismissedDialog(version: VersionInfo.packageInfo.version));
     }
   }
 }

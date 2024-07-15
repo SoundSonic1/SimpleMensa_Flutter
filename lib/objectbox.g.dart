@@ -57,7 +57,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(2, 4487385513029925697),
       name: 'UserSettings',
-      lastPropertyId: const obx_int.IdUid(4, 1936853899514021191),
+      lastPropertyId: const obx_int.IdUid(5, 6125088489955694154),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -79,6 +79,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(4, 1936853899514021191),
             name: 'highlightVegan',
             type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 6125088489955694154),
+            name: 'version',
+            type: 9,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -200,11 +205,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (UserSettings object, fb.Builder fbb) {
           final canteenOrderOffset = fbb.writeListInt64(object.canteenOrder);
-          fbb.startTable(5);
+          final versionOffset =
+              object.version == null ? null : fbb.writeString(object.version!);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, canteenOrderOffset);
           fbb.addBool(2, object.useDarkTheme);
           fbb.addBool(3, object.highlightVegan);
+          fbb.addOffset(4, versionOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -220,11 +228,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.BoolReader().vTableGet(buffer, rootOffset, 8, false);
           final highlightVeganParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final versionParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 12);
           final object = UserSettings(
               id: idParam,
               canteenOrder: canteenOrderParam,
               useDarkTheme: useDarkThemeParam,
-              highlightVegan: highlightVeganParam);
+              highlightVegan: highlightVeganParam,
+              version: versionParam);
 
           return object;
         })
@@ -273,4 +284,8 @@ class UserSettings_ {
   /// See [UserSettings.highlightVegan].
   static final highlightVegan =
       obx.QueryBooleanProperty<UserSettings>(_entities[1].properties[3]);
+
+  /// See [UserSettings.version].
+  static final version =
+      obx.QueryStringProperty<UserSettings>(_entities[1].properties[4]);
 }

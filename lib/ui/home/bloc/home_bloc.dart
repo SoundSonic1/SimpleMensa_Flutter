@@ -37,8 +37,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           showInitialDialog: userRepository.showInitialDialog));
     });
 
-    on<HomeDismissedDialog>((event, emit) {
+    on<HomeDismissedDialog>((event, emit) async {
       userRepository.showInitialDialog = false;
+      final settings = await userRepository.getUserSettings();
+      await userRepository
+          .saveUserSettings(settings.copyWith(version: event.version));
     });
   }
 }

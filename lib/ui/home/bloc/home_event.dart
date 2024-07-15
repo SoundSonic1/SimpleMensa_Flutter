@@ -23,5 +23,7 @@ class HomeOnReorder extends HomeEvent {
 }
 
 class HomeDismissedDialog extends HomeEvent {
-  const HomeDismissedDialog();
+  const HomeDismissedDialog({required this.version});
+
+  final String version;
 }

@@ -13,12 +13,17 @@ import 'package:simple_mensa/ui/theme/theme_bloc.dart';
 import 'package:simple_mensa/ui/theme/theme_state.dart';
 
 class SimpleMensa extends StatelessWidget {
-  const SimpleMensa(
-      {super.key, required this.store, required this.useDarkTheme});
+  const SimpleMensa({
+    super.key,
+    required this.store,
+    required this.useDarkTheme,
+    required this.showInitialDialog,
+  });
 
   static const title = 'SimpleMensa';
   final Store store;
   final bool useDarkTheme;
+  final bool showInitialDialog;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +39,10 @@ class SimpleMensa extends StatelessWidget {
           },
         ),
         RepositoryProvider(
-            create: (_) =>
-                UserRepository(settingsBox: store.box<UserSettings>())),
+            create: (_) => UserRepository(
+                  settingsBox: store.box<UserSettings>(),
+                  showInitialDialog: showInitialDialog,
+                )),
       ],
       child: BlocProvider<ThemeBloc>(
         create: (context) => ThemeBloc(

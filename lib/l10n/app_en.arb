@@ -8,6 +8,5 @@
   "settings": "Settings",
   "settings_highlight_vegan": "Highlight vegan meals",
   "settings_change_theme": "Change theme to dark",
-  "init_dialog_title": "SimpleMensa v1.0.0",
   "init_dialog_content": "You can change the order of the canteens via drag and drop. Have fun!"
 }
