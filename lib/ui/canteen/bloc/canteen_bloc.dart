@@ -11,16 +11,16 @@ class CanteenBloc extends Bloc<CanteenEvent, CanteenState> {
   final UserRepository userRepository;
 
   CanteenBloc({required this.mensaRepository, required this.userRepository})
-      : super(CanteenLoading()) {
+      : super(const CanteenLoading()) {
     on<CanteenLoadData>((event, emit) async {
-      emit(CanteenLoading());
+      emit(const CanteenLoading());
       final userSettings = await userRepository.getUserSettings();
       final meals = await mensaRepository.getMeals(event.canteen.id.toString(),
           DateFormat(Constants.dateFormat).format(event.dateTime));
       if (meals.isNotEmpty) {
         emit(CanteenDataLoaded(meals: meals, userSettings: userSettings));
       } else {
-        emit(CanteenError());
+        emit(const CanteenError());
       }
     });
   }

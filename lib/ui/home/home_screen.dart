@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simple_mensa/data/model/canteen.dart';
 import 'package:simple_mensa/data/repository/mensa_repository.dart';
+import 'package:simple_mensa/data/repository/user_repository.dart';
 import 'package:simple_mensa/extension/build_context_extension.dart';
 import 'package:simple_mensa/simple_mensa.dart';
 import 'package:simple_mensa/ui/canteen/canteen_screen.dart';
@@ -21,9 +22,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-      create: (context) =>
-          HomeBloc(mensaRepository: context.read<MensaRepository>())
-            ..add(HomeLoadData()),
+      create: (context) => HomeBloc(
+          mensaRepository: context.read<MensaRepository>(),
+          userRepository: context.read<UserRepository>())
+        ..add(const HomeLoadData()),
       child: Scaffold(
           appBar: const SimpleAppBar(
             title: SimpleMensa.title,
@@ -35,6 +37,12 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildBody(BuildContext context, HomeState state) {
     if (state is HomeDataLoaded) {
+      if (state.showInitialDialog) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _showInitialDialog(context);
+        });
+      }
+
       return _buildCanteenList(context, state.canteens);
     } else if (state is HomeLoading) {
       return const SimpleProgressIndicator();
@@ -46,7 +54,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildCanteenList(BuildContext context, List<Canteen> canteens) {
     return SimpleRefreshIndicator(
       onRefresh: () async {
-        context.read<HomeBloc>().add(HomeLoadData());
+        context.read<HomeBloc>().add(const HomeLoadData());
       },
       child: ReorderableListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
@@ -72,7 +80,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildErrorMessage(BuildContext context) {
     return SimpleRefreshIndicator(
       onRefresh: () async {
-        context.read<HomeBloc>().add(HomeLoadData());
+        context.read<HomeBloc>().add(const HomeLoadData());
       },
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -86,5 +94,35 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _showInitialDialog(BuildContext context) async {
+    await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              context.loc.init_dialog_title,
+              style: const TextStyle(fontWeight: FontWeight.w500),
+            ),
+            content: Text(
+              context.loc.init_dialog_content,
+              style: const TextStyle(fontSize: 18.0),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text(
+                    'OK',
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                  ))
+            ],
+          );
+        });
+    if (context.mounted) {
+      context.read<HomeBloc>().add(const HomeDismissedDialog());
+    }
   }
 }

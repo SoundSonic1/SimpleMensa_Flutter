@@ -2,12 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:simple_mensa/data/model/user_settings.dart';
 
 @immutable
-abstract class SettingsEvent {}
+abstract class SettingsEvent {
+  const SettingsEvent();
+}
 
-class SettingsLoadData extends SettingsEvent {}
+class SettingsLoadData extends SettingsEvent {
+  const SettingsLoadData();
+}
 
 class SettingsSetInput extends SettingsEvent {
-  SettingsSetInput({required this.userSettings});
+  const SettingsSetInput({required this.userSettings});
 
   final UserSettings userSettings;
 }

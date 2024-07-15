@@ -2,12 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:simple_mensa/data/model/canteen.dart';
 
 @immutable
-abstract class HomeEvent {}
+abstract class HomeEvent {
+  const HomeEvent();
+}
 
-class HomeLoadData extends HomeEvent {}
+class HomeLoadData extends HomeEvent {
+  const HomeLoadData();
+}
 
 class HomeOnReorder extends HomeEvent {
-  HomeOnReorder({
+  const HomeOnReorder({
     required this.oldIndex,
     required this.newIndex,
     required this.canteens,
@@ -16,4 +20,8 @@ class HomeOnReorder extends HomeEvent {
   final int oldIndex;
   final int newIndex;
   final List<Canteen> canteens;
+}
+
+class HomeDismissedDialog extends HomeEvent {
+  const HomeDismissedDialog();
 }

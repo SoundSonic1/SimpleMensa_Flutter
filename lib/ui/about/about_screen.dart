@@ -18,7 +18,6 @@ class AboutScreen extends StatelessWidget {
         if (didPop) {
           return;
         }
-        ;
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (_) => const HomeScreen()),

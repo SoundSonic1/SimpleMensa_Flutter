@@ -17,15 +17,14 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SettingsBloc>(
-      create: (context) =>
-          SettingsBloc(userRepository: context.read())..add(SettingsLoadData()),
+      create: (context) => SettingsBloc(userRepository: context.read())
+        ..add(const SettingsLoadData()),
       child: PopScope(
         canPop: false,
         onPopInvoked: (didPop) {
           if (didPop) {
             return;
           }
-          ;
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (_) => const HomeScreen()),

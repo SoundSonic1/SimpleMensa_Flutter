@@ -6,6 +6,7 @@ class UserRepository {
   UserRepository({required this.settingsBox});
 
   final Box<UserSettings> settingsBox;
+  bool showInitialDialog = true;
 
   Future<UserSettings> getUserSettings() async {
     return await settingsBox.getAsync(Constants.userId) ?? UserSettings();
