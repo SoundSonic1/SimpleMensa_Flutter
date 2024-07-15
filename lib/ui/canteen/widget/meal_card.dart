@@ -12,74 +12,76 @@ class MealCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-        child: Container(
-          color:
-              userSettings.highlightVegan && meal.isVegan ? Colors.green : null,
-          child: ExpansionTile(
-            title: Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
-              child: Text(
-                meal.name,
-                style: const TextStyle(fontWeight: FontWeight.w500),
-              ),
+        color:
+            userSettings.highlightVegan && meal.isVegan ? Colors.green : null,
+        child: ExpansionTile(
+          title: Padding(
+            padding: const EdgeInsets.only(bottom: 4.0),
+            child: Text(
+              meal.name,
+              // style: const TextStyle(fontWeight: FontWeight.w500),
             ),
-            subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (meal.category != null)
-                  Flexible(
-                    child: Text(
-                      meal.category!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
+          ),
+          subtitle: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (meal.category != null)
+                Flexible(
+                  child: Text(
+                    meal.category!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                ),
+              Row(
+                children: [
+                  if (meal.isVegan && userSettings.highlightVegan) ...[
+                    SvgPicture.asset(
+                      'assets/carrot_icon.svg',
+                      width: 20.0,
+                      colorFilter: userSettings.useDarkTheme
+                          ? const ColorFilter.mode(
+                              Colors.white, BlendMode.srcIn)
+                          : null,
                     ),
-                  ),
-                Row(
-                  children: [
-                    if (meal.isVegan && userSettings.highlightVegan) ...[
-                      SvgPicture.asset(
-                        'assets/carrot_icon.svg',
-                        width: 20.0,
-                        colorFilter: userSettings.useDarkTheme
-                            ? const ColorFilter.mode(
-                                Colors.white, BlendMode.srcIn)
-                            : null,
-                      ),
-                      const SizedBox(
-                        width: 8.0,
-                      )
-                    ],
-                    Text(meal.formattedPrices()),
+                    const SizedBox(
+                      width: 8.0,
+                    )
                   ],
-                ),
-              ],
-            ),
-            shape: const Border(),
-            children: <Widget>[
-              if (meal.image != null)
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 12.0, right: 12.0, bottom: 12.0),
-                  child: CachedNetworkImage(imageUrl: 'https:${meal.image}'),
-                ),
-              if (meal.notes?.isNotEmpty == true)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Column(
-                    children: [
-                      for (final note in meal.notes!)
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text('• $note'))
-                    ],
+                  Text(
+                    meal.formattedPrices(),
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
-                ),
-              const SizedBox(
-                height: 8.0,
-              )
+                ],
+              ),
             ],
           ),
+          shape: const Border(),
+          children: <Widget>[
+            if (meal.image != null)
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 4.0, left: 12.0, right: 12.0, bottom: 12.0),
+                child: CachedNetworkImage(imageUrl: 'https:${meal.image}'),
+              ),
+            if (meal.notes?.isNotEmpty == true)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Column(
+                  children: [
+                    for (final note in meal.notes!)
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('• $note'))
+                  ],
+                ),
+              ),
+            const SizedBox(
+              height: 8.0,
+            )
+          ],
         ),
       );
 }
