@@ -57,7 +57,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(2, 4487385513029925697),
       name: 'UserSettings',
-      lastPropertyId: const obx_int.IdUid(5, 6125088489955694154),
+      lastPropertyId: const obx_int.IdUid(6, 9042106440827172622),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -84,6 +84,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(5, 6125088489955694154),
             name: 'version',
             type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 9042106440827172622),
+            name: 'showOnlyStudentPrices',
+            type: 1,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -207,12 +212,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final canteenOrderOffset = fbb.writeListInt64(object.canteenOrder);
           final versionOffset =
               object.version == null ? null : fbb.writeString(object.version!);
-          fbb.startTable(6);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, canteenOrderOffset);
           fbb.addBool(2, object.useDarkTheme);
           fbb.addBool(3, object.highlightVegan);
           fbb.addOffset(4, versionOffset);
+          fbb.addBool(5, object.showOnlyStudentPrices);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -228,6 +234,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.BoolReader().vTableGet(buffer, rootOffset, 8, false);
           final highlightVeganParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
+          final showOnlyStudentPricesParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
           final versionParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 12);
           final object = UserSettings(
@@ -235,6 +243,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               canteenOrder: canteenOrderParam,
               useDarkTheme: useDarkThemeParam,
               highlightVegan: highlightVeganParam,
+              showOnlyStudentPrices: showOnlyStudentPricesParam,
               version: versionParam);
 
           return object;
@@ -288,4 +297,8 @@ class UserSettings_ {
   /// See [UserSettings.version].
   static final version =
       obx.QueryStringProperty<UserSettings>(_entities[1].properties[4]);
+
+  /// See [UserSettings.showOnlyStudentPrices].
+  static final showOnlyStudentPrices =
+      obx.QueryBooleanProperty<UserSettings>(_entities[1].properties[5]);
 }

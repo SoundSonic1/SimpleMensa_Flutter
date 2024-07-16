@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             title: SimpleMensa.title,
           ),
           drawer: const SimpleDrawer(
-            selectedIndex: 0,
+            page: DrawerPage.canteens,
           ),
           body: BlocBuilder<HomeBloc, HomeState>(builder: _buildBody)));
 

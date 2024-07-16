@@ -8,5 +8,6 @@
   "settings": "Einstellungen",
   "settings_highlight_vegan": "Hebe vegane Gerichte hervor",
   "settings_change_theme": "Ändere das Design in dunkel",
+  "settings_show_only_student_prices": "Zeige nur Studentenpreise an",
   "init_dialog_content": "Du kannst die Reihenfolge der Mensen per Drag & Drop ändern. Viel Spaß!"
 }

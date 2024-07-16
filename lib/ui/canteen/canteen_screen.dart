@@ -27,6 +27,7 @@ class CanteenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dateTimeList = DateTimeUtil.buildDateTimeList(days);
+    final locale = Localizations.localeOf(context);
     return DefaultTabController(
       length: dateTimeList.length,
       child: Scaffold(
@@ -39,10 +40,7 @@ class CanteenScreen extends StatelessWidget {
             indicatorColor: Colors.redAccent,
             unselectedLabelColor: Colors.white70,
             tabs: dateTimeList
-                .map((dateTime) => Tab(
-                      child: Text(DateFormat(Constants.germanDateFormat)
-                          .format(dateTime)),
-                    ))
+                .map((dateTime) => _buildTab(dateTime, locale.languageCode))
                 .toList(),
           ),
         ),
@@ -98,5 +96,12 @@ class CanteenScreen extends StatelessWidget {
 
   void _onRefresh(CanteenBloc bloc, DateTime dateTime) {
     bloc.add(CanteenLoadData(canteen: canteen, dateTime: dateTime));
+  }
+
+  Widget _buildTab(DateTime dateTime, String languageCode) {
+    return Tab(
+      child: Text(
+          '${DateFormat.E(languageCode).format(dateTime)} ${DateFormat(Constants.germanDateFormat).format(dateTime)}'),
+    );
   }
 }

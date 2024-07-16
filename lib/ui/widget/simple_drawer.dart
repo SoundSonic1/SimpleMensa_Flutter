@@ -5,10 +5,10 @@ import 'package:simple_mensa/ui/home/home_screen.dart';
 import 'package:simple_mensa/ui/settings/settings_screen.dart';
 
 class SimpleDrawer extends StatelessWidget {
-  const SimpleDrawer({super.key, required this.selectedIndex});
+  const SimpleDrawer({super.key, required this.page});
 
   final selectedColor = Colors.deepPurple;
-  final int selectedIndex;
+  final DrawerPage page;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class SimpleDrawer extends StatelessWidget {
                 ),
               )),
           ListTile(
-            selected: selectedIndex == 0,
+            selected: page == DrawerPage.canteens,
             selectedColor: selectedColor,
             leading: const Icon(Icons.fastfood),
             title: Text(
@@ -40,7 +40,7 @@ class SimpleDrawer extends StatelessWidget {
             onTap: () => _navigateTo(context, const HomeScreen()),
           ),
           ListTile(
-            selected: selectedIndex == 1,
+            selected: page == DrawerPage.settings,
             selectedColor: selectedColor,
             leading: const Icon(Icons.settings),
             title: Text(
@@ -50,7 +50,7 @@ class SimpleDrawer extends StatelessWidget {
             onTap: () => _navigateTo(context, const SettingsScreen()),
           ),
           ListTile(
-            selected: selectedIndex == 2,
+            selected: page == DrawerPage.about,
             selectedColor: selectedColor,
             leading: const Icon(Icons.info_outline),
             title: Text(
@@ -69,3 +69,5 @@ class SimpleDrawer extends StatelessWidget {
         MaterialPageRoute(builder: (_) => screen), (route) => false);
   }
 }
+
+enum DrawerPage { canteens, settings, about }

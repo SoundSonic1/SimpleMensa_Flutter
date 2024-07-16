@@ -37,8 +37,17 @@ class Meal {
     return note != null;
   }
 
-  String formattedPrices() {
+  String formattedPrices(bool showOnlyStudentPrices) {
     final numberFormat = NumberFormat.currency(locale: 'de_De', symbol: '€');
+
+    if (showOnlyStudentPrices) {
+      final studentPrice = prices['Studierende'];
+      if (studentPrice != null) {
+        return numberFormat.format(studentPrice);
+      } else {
+        return '';
+      }
+    }
 
     if (prices.values.every((e) => e == null)) {
       return '';

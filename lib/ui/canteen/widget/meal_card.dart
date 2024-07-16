@@ -51,7 +51,7 @@ class MealCard extends StatelessWidget {
                     )
                   ],
                   Text(
-                    meal.formattedPrices(),
+                    meal.formattedPrices(userSettings.showOnlyStudentPrices),
                     style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                 ],

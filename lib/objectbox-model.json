@@ -39,7 +39,7 @@
     },
     {
       "id": "2:4487385513029925697",
-      "lastPropertyId": "5:6125088489955694154",
+      "lastPropertyId": "6:9042106440827172622",
       "name": "UserSettings",
       "properties": [
         {
@@ -67,6 +67,11 @@
           "id": "5:6125088489955694154",
           "name": "version",
           "type": 9
+        },
+        {
+          "id": "6:9042106440827172622",
+          "name": "showOnlyStudentPrices",
+          "type": 1
         }
       ],
       "relations": []

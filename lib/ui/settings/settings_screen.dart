@@ -35,7 +35,7 @@ class SettingsScreen extends StatelessWidget {
             title: context.loc.settings,
           ),
           drawer: const SimpleDrawer(
-            selectedIndex: 1,
+            page: DrawerPage.settings,
           ),
           body: BlocBuilder<SettingsBloc, SettingsState>(
               builder: (context, state) {
@@ -77,6 +77,18 @@ class SettingsScreen extends StatelessWidget {
               context.read<SettingsBloc>().add(SettingsSetInput(
                   userSettings:
                       settings.userSettings.copyWith(highlightVegan: value)));
+            },
+          ),
+        ),
+        const Divider(),
+        ListTile(
+          title: Text(context.loc.settings_show_only_student_prices),
+          trailing: Switch(
+            value: settings.userSettings.showOnlyStudentPrices,
+            onChanged: (value) {
+              context.read<SettingsBloc>().add(SettingsSetInput(
+                  userSettings: settings.userSettings
+                      .copyWith(showOnlyStudentPrices: value)));
             },
           ),
         ),
