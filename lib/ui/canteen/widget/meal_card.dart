@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:simple_mensa/data/model/meal.dart';
 import 'package:simple_mensa/data/model/user_settings.dart';
 import 'package:simple_mensa/ui/theme/simple_colors.dart';
+import 'package:widget_zoom/widget_zoom.dart';
 
 class MealCard extends StatelessWidget {
   const MealCard({super.key, required this.meal, required this.userSettings});
@@ -68,7 +69,10 @@ class MealCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(
                     top: 4.0, left: 12.0, right: 12.0, bottom: 12.0),
-                child: CachedNetworkImage(imageUrl: 'https:${meal.image}'),
+                child: WidgetZoom(
+                    heroAnimationTag: meal.id,
+                    zoomWidget:
+                        CachedNetworkImage(imageUrl: 'https:${meal.image}')),
               ),
             if (meal.notes?.isNotEmpty == true)
               Padding(
