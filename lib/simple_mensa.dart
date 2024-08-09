@@ -9,6 +9,7 @@ import 'package:simple_mensa/data/repository/user_repository.dart';
 import 'package:simple_mensa/data/service/mensa_client.dart';
 import 'package:simple_mensa/objectbox.g.dart';
 import 'package:simple_mensa/ui/home/home_screen.dart';
+import 'package:simple_mensa/ui/theme/simple_colors.dart';
 import 'package:simple_mensa/ui/theme/theme_bloc.dart';
 import 'package:simple_mensa/ui/theme/theme_state.dart';
 
@@ -53,7 +54,8 @@ class SimpleMensa extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: title,
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              colorScheme:
+                  ColorScheme.fromSeed(seedColor: SimpleColors.primaryColor),
               useMaterial3: true,
             ),
             darkTheme: ThemeData.dark(useMaterial3: true),

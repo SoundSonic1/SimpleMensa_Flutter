@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_mensa/ui/theme/simple_colors.dart';
 
 class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SimpleAppBar(
@@ -14,7 +15,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) => AppBar(
         leading: _buildLeadingWidget(context),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: SimpleColors.primaryColor,
         titleSpacing: 12.0,
         title: Text(
           title,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:simple_mensa/data/model/meal.dart';
 import 'package:simple_mensa/data/model/user_settings.dart';
+import 'package:simple_mensa/ui/theme/simple_colors.dart';
 
 class MealCard extends StatelessWidget {
   const MealCard({super.key, required this.meal, required this.userSettings});
@@ -13,13 +14,16 @@ class MealCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         color:
-            userSettings.highlightVegan && meal.isVegan ? Colors.green : null,
+            userSettings.highlightVegan && meal.isVegan
+            ? (userSettings.useDarkTheme
+                ? SimpleColors.greenDark
+                : SimpleColors.greenLight)
+            : null,
         child: ExpansionTile(
           title: Padding(
             padding: const EdgeInsets.only(bottom: 4.0),
             child: Text(
               meal.name,
-              // style: const TextStyle(fontWeight: FontWeight.w500),
             ),
           ),
           subtitle: Row(

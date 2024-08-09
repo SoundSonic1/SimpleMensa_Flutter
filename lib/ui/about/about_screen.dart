@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_mensa/data/model/version_info.dart';
 import 'package:simple_mensa/extension/build_context_extension.dart';
 import 'package:simple_mensa/ui/home/home_screen.dart';
+import 'package:simple_mensa/ui/theme/simple_colors.dart';
 import 'package:simple_mensa/ui/widget/simple_app_bar.dart';
 import 'package:simple_mensa/ui/widget/simple_drawer.dart';
 import 'package:simple_mensa/util/constants.dart';
@@ -49,8 +50,8 @@ class AboutScreen extends StatelessWidget {
                       ?.copyWith(fontSize: 20)),
               TextSpan(
                 text: context.loc.about_link,
-                style:
-                    const TextStyle(fontSize: 20.0, color: Colors.deepPurple),
+                style: const TextStyle(
+                    fontSize: 20.0, color: SimpleColors.accentColor),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () async {
                     launchUrl(Uri.parse(Constants.projectUrl));

@@ -11,6 +11,7 @@ import 'package:simple_mensa/ui/canteen/bloc/canteen_bloc.dart';
 import 'package:simple_mensa/ui/canteen/bloc/canteen_event.dart';
 import 'package:simple_mensa/ui/canteen/bloc/canteen_state.dart';
 import 'package:simple_mensa/ui/canteen/widget/meal_card.dart';
+import 'package:simple_mensa/ui/theme/simple_colors.dart';
 import 'package:simple_mensa/ui/widget/simple_app_bar.dart';
 import 'package:simple_mensa/ui/widget/simple_error.dart';
 import 'package:simple_mensa/ui/widget/simple_progress_indicator.dart';
@@ -37,7 +38,9 @@ class CanteenScreen extends StatelessWidget {
           bottom: TabBar(
             labelStyle: const TextStyle(fontSize: 16),
             labelColor: Colors.white,
-            indicatorColor: Colors.redAccent,
+            indicatorColor: SimpleColors.accentColor,
+            // indicatorColor: const Color(0xFFe68ce5),
+            indicatorWeight: 4,
             unselectedLabelColor: Colors.white70,
             tabs: dateTimeList
                 .map((dateTime) => _buildTab(dateTime, locale.languageCode))

@@ -3,11 +3,12 @@ import 'package:simple_mensa/extension/build_context_extension.dart';
 import 'package:simple_mensa/ui/about/about_screen.dart';
 import 'package:simple_mensa/ui/home/home_screen.dart';
 import 'package:simple_mensa/ui/settings/settings_screen.dart';
+import 'package:simple_mensa/ui/theme/simple_colors.dart';
 
 class SimpleDrawer extends StatelessWidget {
   const SimpleDrawer({super.key, required this.page});
 
-  final selectedColor = Colors.deepPurple;
+  final selectedColor = SimpleColors.accentColor;
   final DrawerPage page;
 
   @override
@@ -18,7 +19,7 @@ class SimpleDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.deepPurple),
+              decoration: BoxDecoration(color: SimpleColors.primaryColor),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Padding(

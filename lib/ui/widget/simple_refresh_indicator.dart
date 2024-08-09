@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:simple_mensa/ui/theme/simple_colors.dart';
 
 class SimpleRefreshIndicator extends StatelessWidget {
   const SimpleRefreshIndicator(
       {super.key,
       required this.child,
       required this.onRefresh,
-      this.color = Colors.purpleAccent});
+      this.color = SimpleColors.accentColor});
 
   final Widget child;
   final Color color;
