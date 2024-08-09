@@ -6,8 +6,8 @@
   "about_content": "Die App ist mit Flutter ❤\uFE0F gebaut. Sie nutzt die Mensa API des Studentenwerks Dresden. Das Projekt findest du ",
   "about_link": "hier",
   "settings": "Einstellungen",
-  "settings_highlight_vegan": "Hebe vegane Gerichte hervor",
-  "settings_change_theme": "Ändere das Design in dunkel",
+  "settings_highlight_vegan": "Vegane Gerichte hervorheben",
+  "settings_change_theme": "Dunkles Design",
   "settings_show_only_student_prices": "Zeige nur Studentenpreise an",
   "init_dialog_content": "Du kannst die Reihenfolge der Mensen per Drag & Drop ändern. Viel Spaß!"
 }

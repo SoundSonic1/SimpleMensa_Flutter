@@ -7,7 +7,7 @@
   "about_link": "here",
   "settings": "Settings",
   "settings_highlight_vegan": "Highlight vegan meals",
-  "settings_change_theme": "Change theme to dark",
+  "settings_change_theme": "Dark theme",
   "settings_show_only_student_prices": "Show only student prices",
   "init_dialog_content": "You can change the order of the canteens via drag and drop. Have fun!"
 }
